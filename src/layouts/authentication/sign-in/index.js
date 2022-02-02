@@ -36,7 +36,6 @@ function SignIn() {
 		setEmailError("");
 		setPasswordError("");
 		const { email, password } = user;
-		// debugger;
 		if (email == "admin@gmail.com") {
 			try {
 				const res = await api.post("/signin/admin", {
@@ -48,7 +47,6 @@ function SignIn() {
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 
 					window.location = "/admin/allProperties";
-					// window.location.reload();
 				}
 			} catch (error) {}
 		} else {
@@ -60,8 +58,6 @@ function SignIn() {
 				if (res.status == 200) {
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 					localStorage.setItem("userData", JSON.stringify(res.data.payload));
-					// history.push("/dashboard");
-					// window.location.reload();
 					window.location = "/profile";
 				}
 			} catch (error) {
@@ -121,9 +117,9 @@ function SignIn() {
 					/>
 					{passwordError ? <p style={{ color: "red" }}>{passwordError}</p> : ""}
 				</SuiBox>
-				<SuiBox display="flex" alignItems="center">
+				{/* <SuiBox display="flex" alignItems="center">
 					<Switch
-					// checked={rememberMe} onChange={handleSetRememberMe}
+					checked={rememberMe} onChange={handleSetRememberMe}
 					/>
 					<SuiTypography
 						variant="button"
@@ -133,7 +129,7 @@ function SignIn() {
 					>
 						&nbsp;&nbsp;Remember me
 					</SuiTypography>
-				</SuiBox>
+				</SuiBox> */}
 				<SuiBox mt={4} mb={1}>
 					<SuiButton
 						variant="gradient"

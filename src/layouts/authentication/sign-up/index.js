@@ -112,10 +112,10 @@ function SignUp() {
 						Register with
 					</SuiTypography>
 				</SuiBox>
-				<SuiBox mb={2}>
+				{/* <SuiBox mb={2}>
 					<Socials />
-				</SuiBox>
-				<Separator />
+				</SuiBox> */}
+				{/* <Separator /> */}
 				<SuiBox pt={2} pb={3} px={3}>
 					<SuiBox component="form" role="form">
 						<SuiBox mb={2}>

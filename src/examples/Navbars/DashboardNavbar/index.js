@@ -65,7 +65,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
 		controller;
 	const [openMenu, setOpenMenu] = useState(false);
 	const route = useLocation().pathname.split("/").slice(1);
-
+	const Logout = () => {
+		debugger
+		localStorage.removeItem("token");
+		localStorage.removeItem("userData");
+		window.location = "/authentication/sign-in";
+	};
 	useEffect(() => {
 		// Setting the navbar type
 		if (fixedNavbar) {
@@ -171,7 +176,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 							/>
 						</SuiBox>
 						<SuiBox color={light ? "white" : "inherit"}>
-							<Link to="/authentication/sign-in">
+							<Link onClick={Logout}>
 								<IconButton sx={navbarIconButton} size="small">
 									<Icon
 										sx={({ palette: { dark, white } }) => ({
