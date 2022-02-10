@@ -10,6 +10,8 @@ import DetailPage from "layouts/detailPropertyPage";
 import MyBidding from "layouts/myBiddings";
 import BuyedProperties from "layouts/buyedProperties";
 import BuyerBilling from "layouts/BuyerBilling";
+import PropertyBid from "layouts/BidProperty";
+
 //.....................................................
 // ........For Admin
 //.....................................................
@@ -182,5 +184,14 @@ var routes = [
 		component: AllMessages,
 		noCollapse: true,
 	},
+	{
+		type: isAdmin == null ? "" : "collapse",
+		name: "Bid a property",
+		key: "bid",
+		route: '/property/bid/:id',
+		icon: <CustomerSupport size="12px" />,
+		component: PropertyBid,
+		noCollapse: true
+	}
 ];
 export default routes;

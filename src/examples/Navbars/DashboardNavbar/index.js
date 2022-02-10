@@ -1,21 +1,4 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
-
-// react-router components
 import { useLocation, Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
@@ -176,7 +159,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 							/>
 						</SuiBox>
 						<SuiBox color={light ? "white" : "inherit"}>
-							<Link onClick={Logout}>
+							<a onClick={Logout}>
 								<IconButton sx={navbarIconButton} size="small">
 									<Icon
 										sx={({ palette: { dark, white } }) => ({
@@ -193,7 +176,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
 										Log Out
 									</SuiTypography>
 								</IconButton>
-							</Link>
+							</a>
 							<IconButton
 								size="small"
 								color="inherit"

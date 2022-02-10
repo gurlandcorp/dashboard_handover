@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 // Soft UI Dashboard React components
 import SuiBox from "components/SuiBox";
@@ -31,6 +31,7 @@ function SignIn() {
 		});
 	};
 
+	let history = useHistory()
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setEmailError("");
@@ -45,8 +46,8 @@ function SignIn() {
 				if (res.status == 200) {
 					localStorage.setItem("adminAuth", email);
 					localStorage.setItem("token", JSON.stringify(res.data.token));
-
-					window.location = "/admin/allProperties";
+					// window.location = "/admin/allProperties";
+					history.push('/admin/allProperties')
 				}
 			} catch (error) {}
 		} else {
@@ -58,7 +59,8 @@ function SignIn() {
 				if (res.status == 200) {
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 					localStorage.setItem("userData", JSON.stringify(res.data.payload));
-					window.location = "/profile";
+					// window.location = "/profile";
+					history.push('/profile')
 				}
 			} catch (error) {
 				if (error?.response?.data?.message == "No User Exist With This Email") {
@@ -114,6 +116,7 @@ function SignIn() {
 						name="password"
 						onChange={handleInputs}
 						value={user.password}
+						autoComplete="off"
 					/>
 					{passwordError ? <p style={{ color: "red" }}>{passwordError}</p> : ""}
 				</SuiBox>
