@@ -124,57 +124,6 @@ const BidProperty = () => {
                         </SuiBox>
                     </SuiBox>
                 </SuiBox>
-                <SuiBox p={2}>
-                    {/* {propertiesData.length == 0 && (
-                    <Grid item xs={12} md={6} xl={3}>
-                        No Property found
-                    </Grid>
-                    )} */}
-
-                    <Grid container spacing={3}>
-                    {/* {propertiesData &&
-                        propertiesData?.map((item) => {
-                        debugger;
-                        return (
-                            <Grid item xs={12} md={6} xl={3}>
-                            <DefaultProjectCard
-                                image={item.images[0]}
-                                label={item.propertyType}
-                                title={item.propertyTitle}
-                                description={item.description}
-                                action={{
-                                type: "internal",
-                                route: "/pages/profile/profile-overview",
-                                color: "info",
-                                label: "view project",
-                                }}
-                                authors={[
-                                { image: team1, name: "Elena Morison" },
-                                { image: team2, name: "Ryan Milly" },
-                                { image: team3, name: "Nick Daniel" },
-                                { image: team4, name: "Peterson" },
-                                ]}
-                            />
-                            </Grid>
-                        );
-                        })} */}
-
-                    {/* <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        xl={3}
-                        onClick={() => {
-                        renderNewProperty();
-                        }}
-                    >
-                        <PlaceholderCard
-                        title={{ variant: "h5", text: "New Property" }}
-                        outlined
-                        />
-                    </Grid> */}
-                    </Grid>
-                </SuiBox>
                 </Card>
             </SuiBox>
             {/* <Footer /> */}
