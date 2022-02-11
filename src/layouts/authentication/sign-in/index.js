@@ -14,7 +14,7 @@ import api from "../../../services/api";
 
 function SignIn() {
 	const [rememberMe, setRememberMe] = useState(true);
-	const handleSetRememberMe = () => setRememberMe(!rememberMe);
+	// const handleSetRememberMe = () => setRememberMe(!rememberMe);
 	const initialState = {
 		email: "",
 		password: "",
@@ -60,7 +60,16 @@ function SignIn() {
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 					localStorage.setItem("userData", JSON.stringify(res.data.payload));
 					// window.location = "/profile";
-					history.push('/profile')
+					
+					let redirect_link = localStorage.getItem('redirect_link')
+					if(redirect_link!=null && res.data.payload.userType=='Buyer')
+					{
+						history.push(redirect_link)
+					}
+					else
+					{
+						history.push('/profile')
+					}
 				}
 			} catch (error) {
 				if (error?.response?.data?.message == "No User Exist With This Email") {

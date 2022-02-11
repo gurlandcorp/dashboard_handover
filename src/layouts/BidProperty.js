@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -10,28 +10,75 @@ import SuiTypography from "components/SuiTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 
 import Header from "layouts/profile/components/Header";
-// import api from "../../services/api";
+import api from 'services/api';
+import SnackBarAlert from 'components/SnackBarAlert';
 
 const BidProperty = () => {
 
     const [amount, setAmount] = useState();
+    const [amountErr, setAmountErr] = useState('');
+    const [minAmount, setMinAmount] = useState(0);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alert, setAlert] = useState(false);
+
     let {id} = useParams()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        let form_data = {
-            property_id : id,
-            amount: amount
+        if( amount > minAmount )
+        {
+            // store new highest bidding amount
+            setAmountErr('')
+            var sellerId = JSON.parse(localStorage.getItem("userData"))._id;
+            let res = await api.post(`/bidding/bid`, {
+                bidAmount: amount,
+                propertyId: id,
+                sellerId: sellerId,
+            })
+            setAmount('')
+            setAlertMessage(res.data.Message)
+            setAlert(true)
+
+            // fetching new highest bidding amount
+            res = await api.post(`/bidding/highest`, {
+                propertyId: id,
+            })
+            await setMinAmount(res.data[0].bidAmount)
         }
-        console.log(form_data)
-    }
+        else
+        {
+            setAmountErr(`Biding ammount will be grater than ${minAmount}!`)
+        }
+	};
+
+    let history = useHistory()
+
     useEffect(()=> {
+
+        const onLoad = async () => {
+            try {
+                let res = await api.post(`/bidding/highest`, {
+                    propertyId: id,
+                })
+                await setAmount(res.data[0].bidAmount)
+                await setMinAmount(res.data[0].bidAmount)
+                localStorage.getItem('redirect_link') != null && localStorage.removeItem('redirect_link')
+            } catch (error) {
+                if(error?.response?.data.loggedIn == false)
+                {
+                    await localStorage.setItem('redirect_link', `/property/bid/${id}`)
+                    history.push('/authentication/sign-in')
+                }
+            }
+        }
+        onLoad()
+
     },[])
 
     return (
         <DashboardLayout>
             <Header />
-
+            <SnackBarAlert open={alert} message={alertMessage} />
             <SuiBox mt={5} mb={3}>
                 <Card>
                 <SuiBox pt={2} px={2}>
@@ -58,8 +105,14 @@ const BidProperty = () => {
                                     id="amount"
                                     name="amount"
                                     value={amount}
-                                    onChange={(e) => setAmount(e.target.value)}
+                                    onChange={(e) => {
+                                        setAmount(e.target.value)
+                                        amount <= minAmount ? setAmountErr(`Biding ammount will be grater than ${minAmount}!`) : setAmountErr('')
+                                    }}
                                 />
+                                {
+                                    amountErr!='' && <small className="text-danger" style={{fontSize: '0.8rem'}}>Biding ammount will be grater than {minAmount}!</small>
+                                }
                             </SuiBox>
                             <SuiButton
                                 type="submit"
