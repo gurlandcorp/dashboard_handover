@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Switch from "@mui/material/Switch";
+// import Switch from "@mui/material/Switch";
 // Soft UI Dashboard React components
+import CircularProgress from '@mui/material/CircularProgress';
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiInput from "components/SuiInput";
@@ -21,7 +22,8 @@ function SignIn() {
 	};
 	const [user, setUser] = useState(initialState);
 	const [emailError, setEmailError] = useState("");
-	const [passwordError, setPasswordError] = useState("");
+	const [passwordError, setPasswordError] = useState("")
+	const [submiting, setSubmiting] = useState(false)
 	// const [notVerifed, setnotVerifed] = useState("");
 
 	const handleInputs = (e) => {
@@ -33,9 +35,11 @@ function SignIn() {
 
 	let history = useHistory()
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		setEmailError("");
-		setPasswordError("");
+		e.preventDefault()
+		setSubmiting(true)
+
+		setEmailError("")
+		setPasswordError("")
 		const { email, password } = user;
 		if (email == "admin@gmail.com") {
 			try {
@@ -80,14 +84,16 @@ function SignIn() {
 				}
 			}
 		}
+		setSubmiting(false)
 	};
 	return (
 		<CoverLayout
+			size="0.5rem"
 			title="Welcome back"
 			description="Enter your email and password to sign in"
 			image={curved9}
 		>
-			<SuiBox component="form" role="form">
+			<SuiBox component="form" role="form" onSubmit={(e)=>handleSubmit(e)}>
 				<SuiBox mb={2}>
 					<SuiBox mb={1} ml={0.5}>
 						<SuiTypography
@@ -106,7 +112,7 @@ function SignIn() {
 						value={user.email}
 						onChange={handleInputs}
 					/>
-					{emailError ? <p style={{ color: "red" }}>{emailError}</p> : ""}
+					{emailError ? <small style={{ color: "red", fontSize: '11px' }}>{emailError}</small> : ""}
 				</SuiBox>
 				<SuiBox mb={2}>
 					<SuiBox mb={1} ml={0.5}>
@@ -127,29 +133,16 @@ function SignIn() {
 						value={user.password}
 						autoComplete="off"
 					/>
-					{passwordError ? <p style={{ color: "red" }}>{passwordError}</p> : ""}
+					{passwordError ? <small style={{ color: "red", fontSize: '11px' }}>{passwordError}</small> : ""}
 				</SuiBox>
-				{/* <SuiBox display="flex" alignItems="center">
-					<Switch
-					checked={rememberMe} onChange={handleSetRememberMe}
-					/>
-					<SuiTypography
-						variant="button"
-						fontWeight="regular"
-						// onClick={handleSetRememberMe}
-						sx={{ cursor: "pointer", userSelect: "none" }}
-					>
-						&nbsp;&nbsp;Remember me
-					</SuiTypography>
-				</SuiBox> */}
 				<SuiBox mt={4} mb={1}>
 					<SuiButton
+						type={submiting == true ? "button" : "submit"}
 						variant="gradient"
 						color="info"
 						fullWidth
-						onClick={handleSubmit}
-					>
-						sign in
+					>sign in 
+					{ submiting == true && <CircularProgress color="inherit" size="1rem" style={{marginLeft: '0.5rem'}} />  }
 					</SuiButton>
 				</SuiBox>
 				<SuiBox mt={3} textAlign="center">

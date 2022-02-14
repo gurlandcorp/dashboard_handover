@@ -22,18 +22,6 @@ import {
 } from "context";
 import brand from "assets/images/logo-ct.png";
 
-// var createHost = require("cross-domain-storage/host");
-// var storageHost = createHost([
-// 	{
-// 		origin: 'http://localhost:4000',
-// 		allowedMethods: ['get', 'set', 'remove'],
-// 	},
-//     {
-// 		origin: 'http://localhost:3000',
-// 		allowedMethods: ['get', 'set', 'remove'],
-// 	}
-// ]);
-
 export default function App() {
     
     const [controller, dispatch] = useSoftUIController();
@@ -159,7 +147,7 @@ export default function App() {
             <Sidenav
                 color={sidenavColor}
                 brand={brand}
-                brandName="Soft UI Dashboard"
+                brandName="Dashboard"
                 routes={routes}
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}

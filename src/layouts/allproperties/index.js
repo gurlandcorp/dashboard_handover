@@ -95,9 +95,36 @@ function Overview() {
 						</SuiBox> */}
 					</SuiBox>
 					<SuiBox p={2}>
+						
+						{isAdmin ? (
+							""
+						) : (
+							<Grid
+								container 
+								onClick={() => {
+									renderNewProperty();
+								}}
+							>
+								<Grid
+									item
+									xs={12}
+									md={6}
+									xl={3}
+									onClick={() => {
+										renderNewProperty();
+									}}
+								>
+									<PlaceholderCard
+										title={{ variant: "p", text: "New Property" }}
+										outlined
+									/>
+								</Grid>
+							</Grid>
+						)}
+
 						{propertiesData.length == 0 && (
-							<Grid item xs={12} md={6} xl={3}>
-								No Property found
+							<Grid item xs={12} my={2} className="text-center">
+								<small style={{fontSize: '1rem'}}> No Property found! </small>
 							</Grid>
 						)}
 
@@ -152,25 +179,6 @@ function Overview() {
 										</Grid>
 									);
 								})}
-
-							{isAdmin ? (
-								""
-							) : (
-								<Grid
-									item
-									xs={12}
-									md={6}
-									xl={3}
-									onClick={() => {
-										renderNewProperty();
-									}}
-								>
-									<PlaceholderCard
-										title={{ variant: "h5", text: "New Property" }}
-										outlined
-									/>
-								</Grid>
-							)}
 						</Grid>
 					</SuiBox>
 				</Card>

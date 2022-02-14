@@ -17,8 +17,9 @@ import PropertyBid from "layouts/BidProperty";
 //.....................................................
 
 // Soft UI Dashboard React layouts
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
+// import Dashboard from "layouts/dashboard";
+// import Tables from "layouts/tables";
+
 // import Billing from "layouts/billing";
 // import VirtualReality from "layouts/virtual-reality";
 // import RTL from "layouts/rtl";
@@ -31,17 +32,17 @@ import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
 // Soft UI Dashboard React icons
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import Settings from "examples/Icons/Settings";
-import Document from "examples/Icons/Document";
-import SpaceShip from "examples/Icons/SpaceShip";
+// import Shop from "examples/Icons/Shop";
+// import Office from "examples/Icons/Office";
+// import Settings from "examples/Icons/Settings";
+// import Document from "examples/Icons/Document";
+// import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
-import Cube from "examples/Icons/Cube";
+// import Cube from "examples/Icons/Cube";
 // For Site Routes................
-import Home from "layouts/site/home";
-import Home2 from "layouts/site/components/Socials";
+// import Home from "layouts/site/home";
+// import Home2 from "layouts/site/components/Socials";
 
 var userType = JSON.parse(localStorage.getItem("userData"))?.userType;
 var isAdmin = localStorage.getItem("adminAuth");

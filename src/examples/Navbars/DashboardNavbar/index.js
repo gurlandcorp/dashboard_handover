@@ -188,24 +188,24 @@ function DashboardNavbar({ absolute, light, isMini }) {
 								</Icon>
 							</IconButton>
 							{/* <IconButton
-                size="small"
-                color="inherit"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-                <Icon>settings</Icon>
-              </IconButton> */}
+								size="small"
+								color="inherit"
+								sx={navbarIconButton}
+								onClick={handleConfiguratorOpen}
+							>
+								<Icon>settings</Icon>
+							</IconButton> */}
 							{/* <IconButton
-                size="small"
-                color="inherit"
-                sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
-              </IconButton> */}
+								size="small"
+								color="inherit"
+								sx={navbarIconButton}
+								aria-controls="notification-menu"
+								aria-haspopup="true"
+								variant="contained"
+								onClick={handleOpenMenu}
+							>
+								<Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
+							</IconButton> */}
 							{renderMenu()}
 						</SuiBox>
 					</SuiBox>
