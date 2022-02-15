@@ -1,38 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // @mui material components
-import Grid from "@mui/material/Grid";
+// import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import InstagramIcon from "@mui/icons-material/Instagram";
 // Soft UI Dashboard React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+// import SuiBox from "components/SuiBox";
+// import SuiTypography from "components/SuiTypography";
 // Soft UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/Lists/ProfilesList";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-import PlaceholderCard from "examples/Cards/PlaceholderCard";
+// import Footer from "examples/Footer";
+// import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+// import ProfilesList from "examples/Lists/ProfilesList";
+// import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
+// import PlaceholderCard from "examples/Cards/PlaceholderCard";
 // Overview page components
 import Header from "layouts/profile/components/Header";
-import PlatformSettings from "layouts/profile/components/PlatformSettings";
+// import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // Data
-import profilesListData from "layouts/profile/data/profilesListData";
+// import profilesListData from "layouts/profile/data/profilesListData";
 // Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import homeDecor1 from "assets/images/home-decor-1.jpg";
+// import homeDecor2 from "assets/images/home-decor-2.jpg";
+// import homeDecor3 from "assets/images/home-decor-3.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
 // import { alpha, styled } from '@mui/material/styles';
 import SuiButton from "components/SuiButton";
 import api from "../../services/api";
 import "./style.css";
+
 function Overview() {
 	// const [imgUrl, setImgUrl] = useState(
 	// 	"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250"
@@ -52,13 +53,13 @@ function Overview() {
 		"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=250"
 	);
 
-	const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
+	// const [selectedFile, setSelectedFile] = useState();
+	// const [isFilePicked, setIsFilePicked] = useState(false);
 
-	const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-		setIsFilePicked(true);
-	};
+	// const changeHandler = (event) => {
+	// 	setSelectedFile(event.target.files[0]);
+	// 	setIsFilePicked(true);
+	// };
 
 	const handleInputsForPassword = (e) => {
 		setPassword({
@@ -73,15 +74,16 @@ function Overview() {
 		});
 	};
 
-	const imgHandler = (e) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(e.target.files[0]);
-		reader.onload = () => {
-			if (reader.readyState === 2) {
-				setImgUrl(reader.result);
-			}
-		};
-	};
+	// const imgHandler = (e) => {
+	// 	const reader = new FileReader();
+	// 	reader.readAsDataURL(e.target.files[0]);
+	// 	reader.onload = () => {
+	// 		if (reader.readyState === 2) {
+	// 			setImgUrl(reader.result);
+	// 		}
+	// 	};
+	// };
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { phone, name, email } = user;
@@ -95,7 +97,7 @@ function Overview() {
 					phone: phone,
 				}
 			);
-			if (res.status == 200) {
+			if (res.status === 200) {
 				// toast("Your Profile has been updated", {
 				//   position: "top-right",
 				//   autoClose: 5000,
@@ -119,7 +121,7 @@ function Overview() {
 				newpassword: newpassword,
 				currpassword: currpassword,
 			});
-			if (res.status == 200) {
+			if (res.status === 200) {
 				// toast("Your Password has been updated", {
 				//   position: "top-right",
 				//   autoClose: 5000,
@@ -131,7 +133,7 @@ function Overview() {
 				// });
 			}
 		} catch (error) {
-			if (error.response.data.message == "Invalid Password") {
+			if (error.response.data.message === "Invalid Password") {
 				// toast(`${error.response.data.message}`, {
 				//   position: "top-right",
 				//   autoClose: 5000,
