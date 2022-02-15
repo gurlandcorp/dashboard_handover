@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { Grid, MenuItem } from "@mui/material";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 // import Footer from "examples/Footer";
@@ -114,156 +114,150 @@ function AddProperty() {
 			.then((result) => console.log(result))
 			.catch((error) => console.log("error", error));
 	};
+
+	const property_types = [
+		{
+		  value: 'Constructed',
+		  label: 'Constructed',
+		},
+		{
+		  value: 'Non Constructed',
+		  label: 'Non Constructed',
+		}
+	];
+
+	const states = [
+		{
+		  value: 'Sharjah',
+		  label: 'Sharjah',
+		},
+		{
+		  value: 'Ajman',
+		  label: 'Ajman',
+		},
+		{
+			value: 'Fujairah',
+			label: 'Fujairah',
+		},
+		{
+			value: 'Umm Al Quwain',
+			label: 'Umm Al Quwain',
+		}
+	];
+	  
 	return (
 		<DashboardLayout>
 			<Header />
 			<Card sx={{ mt: 5 }}>
-				<div className="m-5">
-					<form>
+				
+				<Grid container style={{padding: '2rem'}}>
+					<Grid item xs={12}>
 						<span className="" style={{ fontSize: "20px", fontWeight: "bold" }}>
 							Property Description
 						</span>
+					</Grid>
+
+					<Grid container spacing={4} columns={12}>
+						<Grid item xs={6}>
+							<TextField fullWidth id="propertyTitle" size="small" name="propertyTitle" label="Property Title" color="info" variant="standard" value={user.propertyTitle} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="number" id="area" size="small" name="area" label="Area" color="info" variant="standard" value={user.area} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="number" id="bedrooms" size="small" name="bedrooms" label="Bed Rooms" color="info" variant="standard" value={user.bedrooms} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="number" id="floors" size="small" name="floors" label="Floors" color="info" variant="standard" value={user.floors} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth
+							id="standard-select-property-type"
+							select
+							label="Select"
+							value={propertyType}
+							onChange={(e) => setpropertyType(e.target.value)}
+							helperText="Please select property type"
+							variant="standard"
+							color="info"
+							>
+							{property_types.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+								{option.label}
+								</MenuItem>
+							))}
+							</TextField>
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="number" id="bathrooms" size="small" name="bathrooms" label="Bathrooms" color="info" variant="standard" value={user.bathrooms} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="number" id="priceDemand" size="small" name="priceDemand" label="Demand Price" color="info" variant="standard" value={user.priceDemand} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth type="date" id="biddingEnd" size="small" name="biddingEnd" label="Bidding End" color="info" variant="standard" value={user.biddingEnd} onChange={(e)=>handleInputs(e)} InputLabelProps={{ shrink: true, }} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth id="address" size="small" name="address" label="Address" color="info" variant="standard" value={user.address} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth id="city" size="small" name="city" label="City" color="info" variant="standard" value={user.city} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth
+							id="state"
+							name="state"
+							select
+							label="Select State"
+							value={countrySate}
+							onChange={(e) => setCountrySate(e.target.value)}
+							helperText="Please select state"
+							variant="standard"
+							color="info"
+							>
+							{states.map((option) => (
+								<MenuItem key={option.value} value={option.value}>
+								{option.label}
+								</MenuItem>
+							))}
+							</TextField>
+						</Grid>
+						<Grid item xs={6}>
+							<TextField fullWidth id="zip" size="small" name="zip" label="Zip" color="info" variant="standard" value={user.zip} onChange={(e)=>handleInputs(e)} />
+						</Grid>
+						<Grid item xs={12}>
+							<TextField fullWidth multiline rows={4} id="description" size="small" name="description" label="Description" color="info" variant="standard" value={user.description} onChange={(e)=>handleInputs(e)} />
+						</Grid>
 						
-						<div class="form row mt-4">
-							<div class="col-md-6">
-								<label for="propertyTitle">Property Title</label>
-								<input
-									type="text"
-									class="form-control"
-									id="propertyTitle"
-									placeholder="Property Title"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="propertyTitle"
-									value={user.propertyTitle}
-									onChange={handleInputs}
-								/>
-							</div>
-							<div class="col-md-6">
-								<label for="area">Area</label>
-								<input
-									type="number"
-									class="form-control "
-									id="area"
-									placeholder="Area"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="area"
-									value={user.area}
-									onChange={handleInputs}
-								/>
-							</div>
-						</div>
-						<div class="form row">
-							<div class="form-group col-md-6">
-								<label for="bedrooms">Bed Rooms</label>
-								<input
-									type="number"
-									class="form-control "
-									id="bedrooms"
-									placeholder="Bed rooms"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="bedrooms"
-									value={user.bedrooms}
-									onChange={handleInputs}
-								/>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="floors">Floors</label>
-								<input
-									type="number"
-									class="form-control "
-									id="floors"
-									placeholder="floors"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="floors"
-									value={user.floors}
-									onChange={handleInputs}
-								/>
-							</div>
-						</div>
-						<div class="form row">
-							<div class="form-group col-md-6">
-								<label for="propertyType">Property Type</label>
-								<select
-									id="propertyType"
-									class="form-control "
-									placeholder="Property Type"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="propertyType"
-									value={propertyType}
-									onChange={(e) => setpropertyType(e.target.value)}
-								>
-									<option>Constructed</option>
-									<option>Non Constructed</option>
-								</select>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="bathrooms">Bathrooms</label>
-								<input
-									type="number"
-									class="form-control"
-									id="bathrooms"
-									placeholder="Bath Rooms"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="bathrooms"
-									value={user.bathrooms}
-									onChange={handleInputs}
-								/>
-							</div>
-						</div>
-						<div class="form row">
-							<div class="form-group col-md-3">
-								<label for="priceDemand">Demand Price</label>
-								<input
-									type="number"
-									class="form-control"
-									id="priceDemand"
-									placeholder="Demand Price"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="priceDemand"
-									value={user.priceDemand}
-									onChange={handleInputs}
-								/>
-							</div>
-							<div class="form-group col-md-3">
-								<label for="biddingEnd">Bidding End</label>
-								<input
-									type="date"
-									class="form-control "
-									id="biddingEnd"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="biddingEnd"
-									value={user.biddingEnd}
-									onChange={handleInputs}
-								/>
-							</div>
-							<div class="form-group col-md-6">
-								<label for="address">Address</label>
-								<input
-									type="text"
-									class="form-control "
-									id="address"
-									placeholder="Address"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="address"
-									value={user.address}
-									onChange={handleInputs}
-								/>
-							</div>
-						</div>
-						<div class="form row">
-							<div class="form-group col-md-6">
-								<label for="city">City</label>
-								<input
-									type="text"
-									class="form-control "
-									id="city"
-									placeholder="City"
-									style={{ borderRadius: "8px", fontSize: "15px" }}
-									name="city"
-									value={user.city}
-									onChange={handleInputs}
-								/>
-							</div>
+						<Grid item xs={12}>
+							<input
+								type="file"
+								className="custom-style"
+								name="images"
+								id="images"
+								accept="image/*"
+								multiple
+								onChange={(e) => multiImagesChange(e)}
+								style={{ marginLeft: "0px" }}
+								// hidden
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<SuiButton
+								variant="gradient"
+								color="dark"
+								size="medium"
+								onClick={(e) => handleSubmit(e)}
+							>
+								Add Property
+							</SuiButton>
+						</Grid>
+					</Grid>
+				</Grid>
+				<div className="m-5">
+					
+					<form>
+						{/* <div class="form row">
 							<div class="form-group col-md-4">
 								<label for="state">State</label>
 								<select
@@ -306,34 +300,13 @@ function AddProperty() {
 								value={user.description}
 								onChange={handleInputs}
 							></textarea>
-						</div>
-						<div class="form-group col-md-6 mt-4 mb-4">
-							<input
-								type="file"
-								className="custom-style"
-								name="images"
-								id="images"
-								accept="image/*"
-								multiple
-								onChange={(e) => multiImagesChange(e)}
-								style={{ marginLeft: "0px" }}
-								// hidden
-							/>
-						</div>
+						</div> */}
 						{/* <button
 							type="button"
 							class="btn custom-style mt-3"
 							//   onClick={(e) => handleSubmit(e)}
 						>
 						</button> */}
-						<SuiButton
-							variant="gradient"
-							color="dark"
-							size="medium"
-							onClick={(e) => handleSubmit(e)}
-						>
-							Add Property
-						</SuiButton>
 					</form>
 				</div>
 			</Card>

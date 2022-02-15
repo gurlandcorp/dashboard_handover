@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -9,8 +9,8 @@ import SuiInput from "components/SuiInput";
 import SuiButton from "components/SuiButton";
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
-import Socials from "layouts/authentication/components/Socials";
-import Separator from "layouts/authentication/components/Separator";
+// import Socials from "layouts/authentication/components/Socials";
+// import Separator from "layouts/authentication/components/Separator";
 // Images
 import curved6 from "assets/images/curved-images/curved14.jpg";
 import api from "../../../services/api";
@@ -18,8 +18,8 @@ import { useHistory } from "react-router-dom";
 
 function SignUp() {
 	const history = useHistory();
-	const [agreement, setAgremment] = useState(true);
-	const handleSetAgremment = () => setAgremment(!agreement);
+	// const [agreement, setAgremment] = useState(true);
+	// const handleSetAgremment = () => setAgremment(!agreement);
 	const initialState = {
 		name: "",
 		email: "",
@@ -63,7 +63,7 @@ function SignUp() {
 				name: name,
 				userType: userType,
 			});
-			if (res.status == 200) {
+			if (res.status === 200) {
 				localStorage.setItem("payload", JSON.stringify(res?.data?.SavedUser));
 				const res2 = await api.post("/signup/verifyemail", {
 					code: res?.data?.SavedUser?.code,
@@ -137,6 +137,7 @@ function SignUp() {
 								onChange={handleInputs}
 							/>
 						</SuiBox>
+						
 						<SuiBox mb={2}>
 							<SuiInput
 								type="password"

@@ -1,9 +1,9 @@
 import Grid from "@mui/material/Grid";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import InstagramIcon from "@mui/icons-material/Instagram";
+// import PinterestIcon from "@mui/icons-material/Pinterest";
+// import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";

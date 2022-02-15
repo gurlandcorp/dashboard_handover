@@ -22,6 +22,7 @@ export default {
   styleOverrides: {
     root: {
       color: dark.main,
+      fontSize: '16px',
     },
   },
 };

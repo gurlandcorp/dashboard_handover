@@ -45,7 +45,7 @@ function Overview() {
 	const [propertiesData, setProperties] = useState([]);
 
 	const renderNewProperty = () => {
-		window.location = "/editproperty";
+		history.push("/property/add");
 	};
 	var isAdmin = localStorage.getItem("adminAuth");
 	const getData = async () => {
@@ -119,9 +119,9 @@ function Overview() {
 										outlined
 									/>
 								</Grid> */}
-								<Button className="text-white" variant="contained" startIcon={<AddIcon />} onClick={() => {
+								<Button className="text-white" variant="contained" startIcon={<AddIcon />} style={{color: '#fff'}} onClick={() => {
 									renderNewProperty();
-								}} >Send</Button>
+								}} >Add property</Button>
 							</Grid>
 						)}
 

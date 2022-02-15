@@ -1,5 +1,3 @@
-// ........Common
-
 // ........For Seller
 import AllProperties from "layouts/allproperties";
 import AddProperty from "layouts/addproperty";
@@ -50,9 +48,9 @@ var isAdmin = localStorage.getItem("adminAuth");
 var routes = [
 	{
 		type: isAdmin == null ? "collapse" : "",
-		name: userType === "Buyer" ? "My Biddings" : "My Properties",
+		name: userType === "Buyer" ? "My Biddings" : "Properties",
 		key: userType === "Buyer" ? "myBiddings" : "myProperties",
-		route: userType === "Buyer" ? "/myBiddings" : "/myProperties",
+		route: userType === "Buyer" ? "/myBiddings" : "/properties",
 		icon: <CustomerSupport size="12px" />,
 		component: userType === "Buyer" ? MyBidding : AllProperties,
 		noCollapse: true,
@@ -61,7 +59,7 @@ var routes = [
 		type: isAdmin == null ? "collapse" : "",
 		name: userType === "Buyer" ? "Buy Properties" : "Add Property",
 		key: userType === "Buyer" ? "Buy Properties" : "addProperty",
-		route: userType === "Buyer" ? "/buyProperty" : "/editproperty",
+		route: userType === "Buyer" ? "/buyProperty" : "/property/add",
 		icon: <CustomerSupport size="12px" />,
 		component: userType === "Buyer" ? BuyedProperties : AddProperty,
 		noCollapse: true,

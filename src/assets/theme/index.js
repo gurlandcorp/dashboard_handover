@@ -1,19 +1,4 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v2.0.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import { createTheme } from "@mui/material/styles";
 
 // Soft UI Dashboard PRO React base styles
@@ -68,7 +53,7 @@ import formLabel from "assets/theme/components/form/formLabel";
 import checkbox from "assets/theme/components/form/checkbox";
 import radio from "assets/theme/components/form/radio";
 import autocomplete from "assets/theme/components/form/autocomplete";
-import input from "assets/theme/components/form/input";
+// import input from "assets/theme/components/form/input";
 import container from "assets/theme/components/container";
 import popover from "assets/theme/components/popover";
 import buttonBase from "assets/theme/components/buttonBase";
@@ -106,7 +91,7 @@ export default createTheme({
     MuiCardContent: { ...cardContent },
     MuiButton: { ...button },
     MuiIconButton: { ...iconButton },
-    MuiInputBase: { ...inputBase },
+    // MuiInputBase: { ...inputBase },
     MuiMenu: { ...menu },
     MuiMenuItem: { ...menuItem },
     MuiSwitch: { ...switchButton },
@@ -133,9 +118,9 @@ export default createTheme({
     MuiCheckbox: { ...checkbox },
     MuiRadio: { ...radio },
     MuiAutocomplete: { ...autocomplete },
-    MuiInput: { ...input },
-    MuiOutlinedInput: { ...input },
-    MuiFilledInput: { ...input },
+    // MuiInput: { ...input },
+    // MuiOutlinedInput: { ...input },
+    // MuiFilledInput: { ...input },
     MuiPopover: { ...popover },
     MuiButtonBase: { ...buttonBase },
     MuiIcon: { ...icon },

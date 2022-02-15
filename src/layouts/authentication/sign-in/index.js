@@ -12,9 +12,10 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import curved9 from "assets/images/curved-images/curved-6.jpg";
 import api from "../../../services/api";
+import { TextField } from "@mui/material";
 
 function SignIn() {
-	const [rememberMe, setRememberMe] = useState(true);
+	// const [rememberMe, setRememberMe] = useState(true);
 	// const handleSetRememberMe = () => setRememberMe(!rememberMe);
 	const initialState = {
 		email: "",
@@ -41,13 +42,13 @@ function SignIn() {
 		setEmailError("")
 		setPasswordError("")
 		const { email, password } = user;
-		if (email == "admin@gmail.com") {
+		if (email === "admin@gmail.com") {
 			try {
 				const res = await api.post("/signin/admin", {
 					email: email,
 					password: password,
 				});
-				if (res.status == 200) {
+				if (res.status === 200) {
 					localStorage.setItem("adminAuth", email);
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 					// window.location = "/admin/allProperties";
@@ -60,13 +61,13 @@ function SignIn() {
 					email: email,
 					password: password,
 				});
-				if (res.status == 200) {
+				if (res.status === 200) {
 					localStorage.setItem("token", JSON.stringify(res.data.token));
 					localStorage.setItem("userData", JSON.stringify(res.data.payload));
 					// window.location = "/profile";
 					
 					let redirect_link = localStorage.getItem('redirect_link')
-					if(redirect_link!=null && res.data.payload.userType=='Buyer')
+					if(redirect_link!=null && res.data.payload.userType==='Buyer')
 					{
 						history.push(redirect_link)
 					}
@@ -76,10 +77,10 @@ function SignIn() {
 					}
 				}
 			} catch (error) {
-				if (error?.response?.data?.message == "No User Exist With This Email") {
+				if (error?.response?.data?.message === "No User Exist With This Email") {
 					setEmailError("No User Exist With This Email");
 				}
-				if (error?.response?.data?.message == "Invalid Password") {
+				if (error?.response?.data?.message === "Invalid Password") {
 					setPasswordError("Invalid Password");
 				}
 			}
@@ -95,7 +96,8 @@ function SignIn() {
 		>
 			<SuiBox component="form" role="form" onSubmit={(e)=>handleSubmit(e)}>
 				<SuiBox mb={2}>
-					<SuiBox mb={1} ml={0.5}>
+				<TextField fullWidth type="email" id="email" name="email" label="Email" color="info" variant="standard" value={user.email} onChange={(e)=>handleInputs(e)} />
+					{/* <SuiBox mb={1} ml={0.5}>
 						<SuiTypography
 							component="label"
 							variant="caption"
@@ -103,19 +105,21 @@ function SignIn() {
 						>
 							Email
 						</SuiTypography>
-					</SuiBox>
-					<SuiInput
+					</SuiBox> */}
+					
+					{/* <SuiInput
 						type="email"
 						placeholder="Email"
 						id="email"
 						name="email"
 						value={user.email}
 						onChange={handleInputs}
-					/>
+					/> */}
 					{emailError ? <small style={{ color: "red", fontSize: '11px' }}>{emailError}</small> : ""}
 				</SuiBox>
 				<SuiBox mb={2}>
-					<SuiBox mb={1} ml={0.5}>
+				<TextField fullWidth type="password" id="password" name="password" label="Password" color="info" variant="standard" value={user.password} onChange={(e)=>handleInputs(e)} autoComplete="off" />
+					{/* <SuiBox mb={1} ml={0.5}>
 						<SuiTypography
 							component="label"
 							variant="caption"
@@ -132,17 +136,17 @@ function SignIn() {
 						onChange={handleInputs}
 						value={user.password}
 						autoComplete="off"
-					/>
+					/> */}
 					{passwordError ? <small style={{ color: "red", fontSize: '11px' }}>{passwordError}</small> : ""}
 				</SuiBox>
 				<SuiBox mt={4} mb={1}>
 					<SuiButton
-						type={submiting == true ? "button" : "submit"}
+						type={submiting === true ? "button" : "submit"}
 						variant="gradient"
 						color="info"
 						fullWidth
 					>sign in 
-					{ submiting == true && <CircularProgress color="inherit" size="1rem" style={{marginLeft: '0.5rem'}} />  }
+					{ submiting === true && <CircularProgress color="inherit" size="1rem" style={{marginLeft: '0.5rem'}} />  }
 					</SuiButton>
 				</SuiBox>
 				<SuiBox mt={3} textAlign="center">
