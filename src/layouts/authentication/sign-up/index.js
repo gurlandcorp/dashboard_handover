@@ -15,6 +15,8 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 import curved6 from "assets/images/curved-images/curved14.jpg";
 import api from "../../../services/api";
 import { useHistory } from "react-router-dom";
+import { TextField } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 
 function SignUp() {
 	const history = useHistory();
@@ -29,7 +31,9 @@ function SignUp() {
 	const [buyer, setBuyer] = useState(false);
 	const [saller, setSaller] = useState(false);
 	const [user, setUser] = useState(initialState);
+	const [error, setError] = useState(initialState);
 	const [email, setEmail] = useState("");
+	const [submiting, setSubmiting] = useState(false)
 
 	//   const history = useHistory();
 	const handleInputs = (e) => {
@@ -49,6 +53,7 @@ function SignUp() {
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setSubmiting(true)
 		setEmail("");
 		let userType = "";
 		if (buyer) userType = "Buyer";
@@ -56,23 +61,41 @@ function SignUp() {
 		else alert("Please select userType");
 		const { phone, name, email, password } = user;
 		try {
-			const res = await api.post("/signup", {
-				email: email,
-				password: password,
-				phone: phone,
-				name: name,
-				userType: userType,
-			});
-			if (res.status === 200) {
-				localStorage.setItem("payload", JSON.stringify(res?.data?.SavedUser));
-				const res2 = await api.post("/signup/verifyemail", {
-					code: res?.data?.SavedUser?.code,
+			if(name.length >= 3 && email.length >= 7 && password.length >= 8)
+			{
+				const res = await api.post("/signup", {
+					email: email,
+					password: password,
+					phone: phone,
+					name: name,
+					userType: userType,
 				});
-				localStorage.setItem(
-					"code",
-					JSON.stringify(res?.data?.SavedUser?.code)
-				);
-        history.push('/authentication/sign-in')
+				if (res.status === 200) {
+					localStorage.setItem("payload", JSON.stringify(res?.data?.SavedUser));
+					const res2 = await api.post("/signup/verifyemail", {
+						code: res?.data?.SavedUser?.code,
+					});
+					localStorage.setItem(
+						"code",
+						JSON.stringify(res?.data?.SavedUser?.code)
+					);
+					history.push('/authentication/sign-in')
+				}
+			}
+			else
+			{
+				let errorList = {}
+				if(name.length == 0)
+				{
+					errorList.name = 'Name is required!'
+				}
+				else if(name.length < 3)
+				{
+					errorList.name = 'Name is not valid!'
+				}
+				errorList.email = email.length == 0 ? 'Email is required!' : email.length < 7 ? 'Email is not valid!' : ''
+				errorList.password = password.length == 0 ? 'Password is required!' : password.length < 8 ? 'Password is not valid!' : ''
+				setError(errorList)
 			}
 
 		} catch (error) {
@@ -80,6 +103,7 @@ function SignUp() {
 				setEmail("Email Already Taken");
 			}
 		}
+		setSubmiting(false)
 
 		// .then(function (response) {
 		// localStorage.setItem("userRegister", JSON.stringify(response?.data));
@@ -117,46 +141,53 @@ function SignUp() {
 				</SuiBox> */}
 				{/* <Separator /> */}
 				<SuiBox pt={2} pb={3} px={3}>
-					<SuiBox component="form" role="form">
+					<SuiBox component="form" role="form" onSubmit={(e)=>handleSubmit(e)}>
 						<SuiBox mb={2}>
-							<SuiInput
+							{/* <SuiInput
 								placeholder="Name"
 								id="name"
 								name="name"
 								value={user.name}
 								onChange={handleInputs}
-							/>
+							/> */}
+							<TextField fullWidth type="text" id="name" name="name" label="Name" color="info" variant="standard" value={user.name} onChange={(e)=>handleInputs(e)} required />
+							{error.name!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.name}</small> : ""}
 						</SuiBox>
 						<SuiBox mb={2}>
-							<SuiInput
+							{/* <SuiInput
 								type="email"
 								placeholder="Email"
 								id="email"
 								name="email"
 								value={user.email}
 								onChange={handleInputs}
-							/>
+							/> */}
+							<TextField fullWidth type="email" id="email" name="email" label="Email" color="info" variant="standard" value={user.email} onChange={(e)=>handleInputs(e)} required />
+							{error.email!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.email}</small> : ""}
 						</SuiBox>
 						
 						<SuiBox mb={2}>
-							<SuiInput
+							{/* <SuiInput
 								type="password"
 								placeholder="Password"
 								id="password"
 								name="password"
 								value={user.password}
 								onChange={handleInputs}
-							/>
+							/> */}
+							<TextField fullWidth type="password" id="password" name="password" label="Password" color="info" variant="standard" value={user.password} onChange={(e)=>handleInputs(e)} />
+							{error.password!='' ? <small style={{ color: "red", fontSize: '11px' }}>{error.password}</small> : ""}
 						</SuiBox>
 						<SuiBox mb={2}>
-							<SuiInput
+							{/* <SuiInput
 								type="tel"
 								placeholder="Phone"
 								id="phone"
 								name="phone"
 								value={user.phone}
 								onChange={handleInputs}
-							/>
+							/> */}
+							<TextField fullWidth type="tel" id="phone" name="phone" label="Phone" color="info" variant="standard" value={user.phone} onChange={(e)=>handleInputs(e)} />
 						</SuiBox>
 						<SuiTypography
 							variant="button"
@@ -202,6 +233,7 @@ function SignUp() {
 							<Checkbox
 							// checked={agreement}
 							// onChange={handleSetAgremment}
+							required
 							/>
 							<SuiTypography
 								variant="button"
@@ -223,12 +255,12 @@ function SignUp() {
 						</SuiBox>
 						<SuiBox mt={4} mb={1}>
 							<SuiButton
+								type={submiting === true ? "button" : "submit"}
 								variant="gradient"
 								color="dark"
-								fullWidth
-								onClick={(e) => handleSubmit(e)}
-							>
+								fullWidth >
 								sign up
+								{ submiting === true && <CircularProgress color="inherit" size="1rem" style={{marginLeft: '0.5rem'}} />  }
 							</SuiButton>
 						</SuiBox>
 						<SuiBox mt={3} textAlign="center">

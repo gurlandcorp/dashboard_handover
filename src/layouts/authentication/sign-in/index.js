@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
+// import SuiInput from "components/SuiInput";
 import SuiButton from "components/SuiButton";
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
